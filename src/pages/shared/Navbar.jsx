@@ -45,9 +45,9 @@ const Navbar = () => {
   const toggleTheme = () => setTheme(p => (p === 'dark' ? 'light' : 'dark'));
 
   const navLinks = [
-    { name: 'Features', path: '#features' },
+    { name: 'Features', path: 'features' },
     { name: 'Pricing', path: '#pricing' },
-    { name: 'How It Works', path: '#works' },
+    { name: 'How It Works', path: 'process' },
     { name: 'Blog', path: '/blog' },
   ];
 

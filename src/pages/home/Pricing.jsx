@@ -1,130 +1,140 @@
-
-// eslint-disable-next-line no-unused-vars
-import { motion } from 'framer-motion';
-import { Check, ShieldCheck, Zap, Crown, Globe } from 'lucide-react';
+import React from 'react';
+import { motion as Motion } from 'framer-motion';
 
 const Pricing = () => {
-  const plans = [
+  const tiers = [
     {
-      name: "Starter",
+      name: "Beta Member",
       price: "0",
-      desc: "For freelancers just getting started with secure work.",
-      features: ["3 Active Contracts", "Standard Support", "Basic Templates", "1.5% Escrow Fee"],
-      highlight: false,
-      color: "blue",
-      icon: <Zap className="w-5 h-5 text-blue-400" />
+      desc: "For the early adopters helping us build the future of freelance security.",
+      features: [
+        "Unlimited Contract Drafts",
+        "Digital E-Signatures",
+        "Basic Escrow-Lite Verification",
+        "PDF Exports",
+        "Community Support"
+      ],
+      cta: "Join Beta",
+      highlight: false
     },
     {
-      name: "Pro Creator",
+      name: "Professional",
       price: "19",
-      desc: "For high-volume professionals who need total protection.",
-      features: ["Unlimited Contracts", "Priority Mediation", "Custom Branding", "0.5% Escrow Fee"],
-      highlight: true,
-      color: "amber",
-      icon: <Crown className="w-5 h-5 text-amber-400" />
+      desc: "Everything you need to run a high-volume freelance business safely.",
+      features: [
+        "Everything in Beta",
+        "Phase-Based Payment Tracking",
+        "Priority Dispute Resolution",
+        "Custom Branding on Contracts",
+        "Bulk PDF Archiving",
+        "API Access (Upcoming)"
+      ],
+      cta: "Get Started",
+      highlight: true
     },
     {
       name: "Enterprise",
-      price: "49",
-      desc: "For agencies and teams requiring massive scale.",
-      features: ["Team Management", "API Access", "White-label Portal", "0.1% Escrow Fee"],
-      highlight: false,
-      color: "purple",
-      icon: <Globe className="w-5 h-5 text-purple-400" />
+      price: "Custom",
+      desc: "For agencies and teams managing 50+ active contracts simultaneously.",
+      features: [
+        "Multi-User Team Seats",
+        "Legal Counsel Review",
+        "White-Label Portal",
+        "Dedicated Account Manager",
+        "Custom Integration Support"
+      ],
+      cta: "Contact Sales",
+      highlight: false
     }
   ];
 
   return (
-    <section className="relative py-16 md:py-32 bg-[#0a0c10] overflow-hidden text-slate-200">
-      {/* Dynamic Background Glows */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_50%_10%,rgba(56,189,248,0.1),transparent_60%)]" />
-      
-      <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
-        <div className="text-center mb-16 md:mb-24">
-          <motion.h2 
+    <section id="pricing" className="py-24 bg-white dark:bg-black transition-colors duration-500 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6">
+        
+        {/* Header */}
+        <div className="text-center mb-20">
+          <Motion.span 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="text-blue-500 font-bold tracking-[0.4em] text-[10px] uppercase mb-4"
+            className="text-[#4f46e5] font-black uppercase tracking-[0.4em] text-[10px]"
           >
-            Scale Your Security
-          </motion.h2>
-          <motion.h1 
-            initial={{ opacity: 0, y: 10 }}
+            Flexible Tiers
+          </Motion.span>
+          <Motion.h2 
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-7xl font-bold tracking-tight text-white leading-none"
+            className="text-4xl md:text-6xl font-black text-zinc-900 dark:text-white uppercase tracking-tighter mt-4"
           >
-            Simple fees. <br/>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
-              No hidden costs.
-            </span>
-          </motion.h1>
+            Transparent <span className="text-zinc-400 dark:text-zinc-700 italic">Pricing.</span>
+          </Motion.h2>
         </div>
 
-        {/* 3-Column Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-          {plans.map((plan, i) => (
-            <motion.div
+        {/* Pricing Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {tiers.map((tier, i) => (
+            <Motion.div
               key={i}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className={`relative p-8 rounded-[2.5rem] border transition-all duration-500 flex flex-col ${
-                plan.highlight 
-                ? 'border-amber-500/40 bg-white/5 backdrop-blur-2xl ring-1 ring-amber-500/20 lg:scale-105 z-20 shadow-[0_20px_50px_-15px_rgba(245,158,11,0.2)]' 
-                : 'border-white/10 bg-white/[0.02] backdrop-blur-md hover:border-white/20'
+              viewport={{ once: true }}
+              className={`relative p-10 border rounded-sm transition-all flex flex-col h-full ${
+                tier.highlight 
+                ? 'border-[#4f46e5] bg-zinc-50 dark:bg-zinc-900/40 shadow-2xl shadow-indigo-500/10' 
+                : 'border-zinc-100 dark:border-white/5 bg-white dark:bg-black'
               }`}
             >
-              {plan.highlight && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-600 to-amber-400 text-black text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-xl">
+              {tier.highlight && (
+                <div className="absolute top-0 right-10 -translate-y-1/2 bg-[#4f46e5] text-white text-[9px] font-black px-3 py-1 uppercase tracking-widest rounded-full">
                   Most Popular
                 </div>
               )}
-              
-              <div className="flex justify-between items-start mb-8">
-                <div className="p-3 bg-white/5 rounded-2xl border border-white/10">
-                  {plan.icon}
+
+              <div className="mb-8">
+                <h3 className="text-sm font-black text-[#4f46e5] uppercase tracking-widest mb-4">
+                  {tier.name}
+                </h3>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-4xl font-black text-zinc-900 dark:text-white">
+                    {tier.price !== "Custom" ? `$${tier.price}` : tier.price}
+                  </span>
+                  {tier.price !== "Custom" && (
+                    <span className="text-zinc-400 text-xs font-bold uppercase">/mo</span>
+                  )}
                 </div>
+                <p className="text-zinc-500 dark:text-zinc-400 text-xs mt-4 leading-relaxed font-medium">
+                  {tier.desc}
+                </p>
               </div>
 
-              <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
-              <p className="text-slate-400 text-sm leading-relaxed mb-8 min-h-[40px]">
-                {plan.desc}
-              </p>
-              
-              <div className="mb-10 flex items-baseline gap-1">
-                <span className="text-6xl font-black text-white">${plan.price}</span>
-                <span className="text-slate-500 font-medium">/mo</span>
-              </div>
-
-              <div className="space-y-5 mb-12 flex-grow">
-                {plan.features.map((feat, index) => (
-                  <div key={index} className="flex items-center gap-4 text-slate-300">
-                    <div className={`p-1 rounded-full ${
-                      plan.color === 'blue' ? 'bg-blue-500/20' : 
-                      plan.color === 'amber' ? 'bg-amber-500/20' : 'bg-purple-500/20'
-                    }`}>
-                      <Check className={`w-3 h-3 ${
-                        plan.color === 'blue' ? 'text-blue-400' : 
-                        plan.color === 'amber' ? 'text-amber-400' : 'text-purple-400'
-                      }`} />
-                    </div>
-                    <span className="text-sm font-medium">{feat}</span>
-                  </div>
+              <ul className="space-y-4 mb-10 flex-grow">
+                {tier.features.map((feature, idx) => (
+                  <li key={idx} className="flex items-center gap-3 text-xs font-bold text-zinc-600 dark:text-zinc-300 uppercase tracking-tight">
+                    <svg className="w-3 h-3 text-[#4f46e5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {feature}
+                  </li>
                 ))}
-              </div>
+              </ul>
 
-              <button className={`w-full py-4 rounded-2xl font-black text-xs uppercase tracking-widest transition-all active:scale-95 flex items-center justify-center gap-2 ${
-                plan.highlight 
-                ? 'bg-amber-500 text-black hover:bg-amber-400 shadow-lg' 
-                : 'bg-white/5 text-white hover:bg-white/10 border border-white/10'
+              <button className={`w-full py-4 text-[10px] font-black uppercase tracking-[0.2em] transition-all active:scale-95 ${
+                tier.highlight 
+                ? 'bg-[#4f46e5] text-white hover:brightness-110 shadow-lg shadow-indigo-500/30' 
+                : 'bg-zinc-900 dark:bg-white text-white dark:text-black hover:opacity-90'
               }`}>
-                {plan.highlight && <ShieldCheck className="w-4 h-4" />}
-                Choose {plan.name}
+                {tier.cta}
               </button>
-            </motion.div>
+            </Motion.div>
           ))}
         </div>
+
+        {/* FAQ/Footnote */}
+        <p className="text-center mt-16 text-[10px] font-black text-zinc-400 uppercase tracking-widest">
+          * Beta members get 50% off for life when Professional tier launches.
+        </p>
+
       </div>
     </section>
   );
