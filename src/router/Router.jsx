@@ -3,6 +3,7 @@ import RootLayOut from "../layouts/RootLayOut";
 import Home from "../pages/home/Home";
 import Features from "../pages/features/Features";
 import Process from "../pages/process/Process";
+import BlogPage from "../pages/blog/BlogPage";
 
 export const router = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
             {
                 path: 'process',
                 element: <Process/>
+            },
+            {
+                path: 'blog',
+                element: <BlogPage/>
             },
         ]
     }
