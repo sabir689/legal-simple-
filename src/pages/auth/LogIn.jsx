@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { AuthContext } from '../../contexts/AuthContext';
-import { useNavigate, Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext'; 
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { motion as Motion } from 'framer-motion';
 
@@ -9,8 +9,11 @@ const Login = () => {
     const { signIn, googleLogin } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
 
-    // The 'errors' object is now utilized below to show validation messages
+    // Determine where the user was trying to go before being redirected here
+    const from = location.state?.pathname || "/dashboard";
+
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = async (data) => {
@@ -29,7 +32,8 @@ const Login = () => {
                 customClass: { popup: 'border border-white/10 rounded-3xl' }
             });
 
-            navigate('/');
+            // Redirect to the original destination or the dashboard
+            navigate(from, { replace: true });
         } catch (err) {
             const errorMessage = err.message.includes("auth/") 
                 ? err.message.split('(')[1].split(')')[0].replace('auth/', '').replace(/-/g, ' ')
@@ -51,9 +55,10 @@ const Login = () => {
     const handleGoogleEntry = async () => {
         try {
             await googleLogin();
-            navigate('/');
+            // Google login also respects the 'from' redirect
+            navigate(from, { replace: true });
         } catch (error) {
-            console.error(error);
+            console.error("Google Auth Failure:", error);
         }
     };
 
